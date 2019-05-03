@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styling.css" th:href="@{/styling.css}">
+</head>
+<body>
+
+<div class="login-page">
+    <div class="form">
+        <form class="login-form" method="post" th:action="@{/createuser}">
+            <input type="text" name="username" placeholder="name"/>
+            <input type="password" name="password" placeholder="password"/>
+            <input type="text" placeholder="email address"/>
+            <input id="logbutton" type="submit" class="button" value="Create User">
+            <p class="message">Already registered? <a href="/">Sign In</a></p>
+        </form>
+    </div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+
+</body>
+</html>

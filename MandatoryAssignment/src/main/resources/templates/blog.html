@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/styling.css" th:href="@{/styling.css}">
+    <style>
+        #createbutton {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #4CAF50;
+            width: 200px;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form th:if="${userType == 2}" th:action="@{/createBlog}">
+        <input id="createbutton" type="submit" class="button" value="Create Blog Post">
+    </form>
+    <form th:action="@{/logout}">
+        <input id="logoutbutton" type="submit" class="button" value="Logout">
+    </form>
+    <div id="blogform">
+        <div th:each="blog : ${blogs}">
+            <h2 th:text="${blog.getHeader()}"></h2>
+            <p th:text="${blog.getDate()}"></p>
+            <p th:text="${blog.getText()}"></p>
+            <br><p th:text="----------"></p><br>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+

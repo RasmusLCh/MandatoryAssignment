@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/styling.css" th:href="@{/styling.css}">
+       <style>
+        input{
+            font-family: "Roboto", sans-serif;
+            outline: 0;
+            background: #f2f2f2;
+            width: 100%;
+            border: 0;
+            margin: 0px 0px 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="blogform">
+        <form method="post" th:action="@{/createBlog}">
+            <input type="hidden" name="date" th:value="${#dates.format(#dates.createNow(), 'dd/MM yyyy')}" class="form-control"></p>
+            <h3 th:text="Header"></h3>
+            <input type="text" th:name="header" th:maxlength="45">
+            <h3 th:text="Text"></h3>
+            <input type="text" th:name="text" th:maxlength="500">
+            <input id="logbutton" type="submit" value="Create">
+        </form>
+    </div>
+</body>
+</html>
