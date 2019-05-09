@@ -22,7 +22,7 @@ public class BlogRepository {
     }
 
     public void Insert (String header, String text, Date date) throws Exception {
-        pstmt = con.prepareStatement("INSERT INTO mandatorylogin.blogs (text, date, header) VALUES (?, ?, ?)");
+        pstmt = getConnection().prepareStatement("INSERT INTO mandatorylogin.blogs (text, date, header) VALUES (?, ?, ?)");
         pstmt.setString(1, text);
         pstmt.setDate(2, date);
         pstmt.setString(3, header);
@@ -31,18 +31,18 @@ public class BlogRepository {
     }
 
     public ResultSet Read (int id) throws Exception{
-        pstmt = con.prepareStatement("SELECT * FROM mandatorylogin.blogs WHERE id=?");
+        pstmt = getConnection().prepareStatement("SELECT * FROM mandatorylogin.blogs WHERE id=?");
         pstmt.setInt(1, id);
         return pstmt.executeQuery();
     }
 
     public ResultSet ReadAll () throws Exception{
-        pstmt = con.prepareStatement("SELECT * FROM mandatorylogin.blogs ORDER BY id DESC");
+        pstmt = getConnection().prepareStatement("SELECT * FROM mandatorylogin.blogs ORDER BY id DESC");
         return pstmt.executeQuery();
     }
 
     public void Update (int id, String text, Date date, String header) throws Exception{
-        pstmt = con.prepareStatement("UPDATE mandatorylogin.blogs SET text=?, date=?, header=? WHERE id=?");
+        pstmt = getConnection().prepareStatement("UPDATE mandatorylogin.blogs SET text=?, date=?, header=? WHERE id=?");
         pstmt.setString(1, text);
         pstmt.setDate(2, date);
         pstmt.setString(3, header);
@@ -52,10 +52,16 @@ public class BlogRepository {
     }
 
     public void Delete(int id) throws Exception {
-        pstmt = con.prepareStatement("DELETE FROM mandatorylogin.blogs WHERE id=?");
+        pstmt = getConnection().prepareStatement("DELETE FROM mandatorylogin.blogs WHERE id=?");
         pstmt.setInt(1, id);
         pstmt.execute();
         pstmt.close();
     }
 
+    private Connection getConnection() throws Exception {
+        if(con.isClosed()){
+            con = DriverManager.getConnection("jdbc:mysql://den1.mysql5.gear.host:3306/mandatorylogin", "mandatorylogin", "Ks279oM-5?4A");
+        }
+        return con;
+    }
 }
